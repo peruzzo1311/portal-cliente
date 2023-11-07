@@ -1,7 +1,7 @@
 import { BaixarNota, ExportaNotas } from '@/types/Request'
 import { User } from '@/types/User'
 import NotaFiscal from '@/types/nota-fiscal'
-import FormatProperties from '@/utils/formatProperties'
+import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
 
 export async function exportaNotas(user: User): Promise<ExportaNotas> {

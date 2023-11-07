@@ -5,6 +5,7 @@ import { InputText } from '@/components/text-input'
 import { AppDispatch } from '@/store'
 import { useAppDispatch } from '@/store/hooks'
 import { User } from '@/types/User'
+import handleError from '@/utils/handle-error'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Check } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
@@ -39,17 +40,6 @@ export default function LoginScreen({ navigation }: any) {
     })
   }
 
-  const handleError = (error: any) => {
-    const status = error.response?.status
-    const messages: any = {
-      401: 'Usuário ou senha incorretos.',
-      500: 'Servidor indisponível, tente novamente mais tarde.',
-    }
-    const message = messages[status] || 'Ocorreu um erro inesperado.'
-    toast.show(message)
-    console.error('Erro:', error)
-  }
-
   const handleStore = async (value: any) => {
     try {
       const jsonValue = JSON.stringify(value)
@@ -79,7 +69,14 @@ export default function LoginScreen({ navigation }: any) {
     setIsLoading(true)
 
     try {
+      if (!username || !password) {
+        toast.show('Preencha todos os campos')
+
+        return
+      }
+
       const user = await handleLogin({ username, password })
+
       if (user) {
         try {
           handleDispatch(user, keepLogin)
@@ -89,12 +86,12 @@ export default function LoginScreen({ navigation }: any) {
             keepLogin,
           })
           handleNavigation()
-        } catch (error) {
-          handleError(error)
+        } catch (error: any) {
+          toast.show(handleError(error))
         }
       }
-    } catch (error) {
-      handleError(error)
+    } catch (error: any) {
+      toast.show(handleError(error))
     } finally {
       setIsLoading(false)
     }
@@ -125,7 +122,7 @@ export default function LoginScreen({ navigation }: any) {
         }
       }
     } catch (error: any) {
-      handleError(error)
+      toast.show(handleError(error))
     } finally {
       setIsLoading(false)
     }
@@ -242,9 +239,10 @@ export default function LoginScreen({ navigation }: any) {
               justifyContent={'center'}
             >
               <Text
-                fontSize={16}
+                fontSize={'$6'}
                 color={'$primary6'}
                 onPress={() => navigation.navigate('DocumentValidate')}
+                textDecorationLine='underline'
               >
                 Não possui uma conta?
               </Text>

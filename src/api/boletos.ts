@@ -1,7 +1,7 @@
 import { BaixarTitulo, ExportaTitulos } from '@/types/Request'
 import Titulo from '@/types/Titulo'
 import { User } from '@/types/User'
-import FormatProperties from '@/utils/formatProperties'
+import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
 
 export async function exportaTitulos(user: User): Promise<ExportaTitulos> {

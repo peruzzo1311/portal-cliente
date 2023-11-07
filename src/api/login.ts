@@ -20,12 +20,13 @@ export async function login({ username, password }: getTokenParams) {
 }
 
 export async function getToken({ username, password }: getTokenParams) {
+  const data = {
+    username: `${username.trim()}@kgepel.com.br`,
+    password,
+  }
   const res = await axios.post(
     'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/authentication/actions/login',
-    {
-      username,
-      password,
-    },
+    data,
     {
       headers: {
         'Content-Type': 'application/json',

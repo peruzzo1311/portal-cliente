@@ -1,49 +1,75 @@
 import { login } from '@/api/login'
-import { ThemedButton } from '@/components/button'
+import { createUser } from '@/api/register'
+import RegisterFeedbackDialog from '@/components/register-feedback-dialog'
 import { InputText } from '@/components/text-input'
+import { RegisterUser } from '@/types/User'
+import schema from '@/utils/form-register-shape'
+import handleError from '@/utils/handle-error'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
-import { useRef, useState } from 'react'
-import { TextInput } from 'react-native-gesture-handler'
-import { Button, View } from 'tamagui'
+import { useState } from 'react'
+import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import { Keyboard } from 'react-native'
+import { Button, Text, View } from 'tamagui'
 
-type FormData = {
+type FormDataProps = {
   name: string
   familyName: string
   password: string
-  confirmPassword: string
+  passwordConfirm: string
 }
 
 export default function RegisterModal({ route, navigation }: any) {
+  const [openFeedback, setOpenFeedback] = useState(false)
+  const [username, setUsername] = useState('')
   const { codCli, email } = route.params
-  const [formData, setFormData] = useState({} as FormData)
-  const [isLoading, setIsLoading] = useState(false)
-  const sobrenomeInputRef = useRef<TextInput>(null)
-  const senhaInputRef = useRef<TextInput>(null)
-  const confirmarSenhaInputRef = useRef<TextInput>(null)
+
   const toast = useToastController()
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setFocus,
+    formState: { isSubmitting, isValid },
+  } = useForm<FormDataProps>({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      name: '',
+      familyName: '',
+      password: '',
+      passwordConfirm: '',
+    },
+    mode: 'all',
+    shouldFocusError: true,
+  })
 
-  const handleError = (error: any) => {
-    const status = error.response?.status
-    const messages: any = {
-      401: 'Usuário ou senha incorretos.',
-      500: 'Servidor indisponível, tente novamente mais tarde.',
-    }
-    const message = messages[status] || 'Ocorreu um erro inesperado.'
-    toast.show(message)
-    console.error('Erro:', error)
-  }
-
-  const handleSubmit = async () => {
+  const handleRegister: SubmitHandler<FormDataProps> = async (data) => {
     try {
-      const { user, token } = await login({
-        username: 'weliton.ribeiro@kgepel.com.br',
+      const { token } = await login({
+        username: 'weliton.ribeiro',
         password: 'S@p1ens',
       })
+
+      const user: RegisterUser = {
+        name: data.name,
+        familyName: data.familyName,
+        email: email,
+        password: data.password,
+        codCli: codCli,
+        token: token,
+      }
+
+      const username = await createUser(user)
+
+      if (username) {
+        setUsername(username)
+
+        setOpenFeedback(true)
+        Keyboard.dismiss()
+      }
     } catch (error: any) {
-      handleError(error)
-    } finally {
-      setIsLoading(false)
+      toast.show(handleError(error))
     }
   }
 
@@ -53,65 +79,146 @@ export default function RegisterModal({ route, navigation }: any) {
         width={40}
         height={40}
         backgroundColor={'#FFF'}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => {
+          navigation.goBack(), reset()
+        }}
       >
         <ChevronLeft color={'$primary7'} size={40} />
       </Button>
 
       <View marginVertical={24} gap={16}>
-        <InputText
-          placeholder='Nome'
-          autoFocus
-          selectTextOnFocus
-          blurOnSubmit={false}
-          onSubmitEditing={() => sobrenomeInputRef.current?.focus()}
-          onChangeText={(text) => setFormData({ ...formData, name: text })}
+        <Controller
+          control={control}
+          name='name'
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { invalid, error },
+          }) => (
+            <View>
+              <InputText
+                placeholder='Nome'
+                value={value}
+                onChangeText={onChange}
+                error={invalid}
+                ref={ref}
+                blurOnSubmit={false}
+                onSubmitEditing={() => setFocus('familyName')}
+              />
+
+              {error && (
+                <Text fontSize={'$4'} color={'$red10'}>
+                  {error.message}
+                </Text>
+              )}
+            </View>
+          )}
         />
 
-        <InputText
-          placeholder='Sobrenome'
-          ref={sobrenomeInputRef}
-          selectTextOnFocus
-          blurOnSubmit={false}
-          onSubmitEditing={() => senhaInputRef.current?.focus()}
-          onChangeText={(text) =>
-            setFormData({ ...formData, familyName: text })
-          }
+        <Controller
+          control={control}
+          name='familyName'
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { invalid, error },
+          }) => (
+            <View>
+              <InputText
+                placeholder='Sobrenome'
+                value={value}
+                onChangeText={onChange}
+                error={invalid}
+                ref={ref}
+                blurOnSubmit={false}
+                onSubmitEditing={() => setFocus('password')}
+              />
+
+              {error && (
+                <Text fontSize={'$4'} color={'$red10'}>
+                  {error.message}
+                </Text>
+              )}
+            </View>
+          )}
         />
 
-        <InputText
-          placeholder='Senha'
-          ref={senhaInputRef}
-          selectTextOnFocus
-          secureTextEntry={true}
-          blurOnSubmit={false}
-          onSubmitEditing={() => confirmarSenhaInputRef.current?.focus()}
-          onChangeText={(text) => setFormData({ ...formData, password: text })}
+        <Controller
+          control={control}
+          name='password'
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { invalid, error },
+          }) => (
+            <View>
+              <InputText
+                placeholder='Senha'
+                value={value}
+                onChangeText={onChange}
+                error={invalid}
+                secureTextEntry={true}
+                ref={ref}
+                blurOnSubmit={false}
+                onSubmitEditing={() => setFocus('passwordConfirm')}
+              />
+
+              {error && (
+                <Text fontSize={'$4'} color={'$red10'}>
+                  {error.message}
+                </Text>
+              )}
+            </View>
+          )}
         />
 
-        <InputText
-          placeholder='Confirmar Senha'
-          ref={confirmarSenhaInputRef}
-          selectTextOnFocus
-          secureTextEntry={true}
-          onChangeText={(text) =>
-            setFormData({ ...formData, confirmPassword: text })
-          }
+        <Controller
+          control={control}
+          name='passwordConfirm'
+          render={({
+            field: { onChange, value, ref },
+            fieldState: { invalid, error },
+          }) => (
+            <View>
+              <InputText
+                placeholder='Confirmar Senha'
+                value={value}
+                onChangeText={onChange}
+                error={invalid}
+                secureTextEntry={true}
+                ref={ref}
+              />
+
+              {error && (
+                <Text fontSize={'$4'} color={'$red10'}>
+                  {error.message}
+                </Text>
+              )}
+            </View>
+          )}
         />
       </View>
 
-      <ThemedButton
-        // @ts-ignore
-        pinBottom
+      <Button
+        position='absolute'
+        bottom={0}
+        left={0}
+        right={0}
+        color={isValid ? '$text-white' : '$text-primary'}
         fontWeight={'bold'}
-        fontSize={20}
-        disabled={isLoading}
-        opacity={isLoading ? 0.5 : 1}
+        size={'$5'}
+        backgroundColor={isValid ? '$primary7' : '$gray5'}
+        disabled={!isValid || isSubmitting}
+        opacity={isSubmitting ? 0.5 : 1}
         borderRadius={0}
-        onPress={handleSubmit}
+        onPress={handleSubmit(handleRegister)}
       >
-        {isLoading ? 'Carregando...' : 'Finalizar cadastro'}
-      </ThemedButton>
+        {isSubmitting ? 'Carregando' : 'Finalizar cadastro'}
+      </Button>
+
+      <RegisterFeedbackDialog
+        username={username}
+        open={openFeedback}
+        setOpen={setOpenFeedback}
+        navigation={navigation}
+      />
     </View>
   )
 }

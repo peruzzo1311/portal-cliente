@@ -31,7 +31,7 @@ export default function HomeScreen({ navigation }: any) {
   const [pagamentosPeriodo, setPagamentosPeriodo] = useState<
     PagamentoPeriodo[]
   >([])
-  const [activeNotFound, setActiveNotFound] = useState(true)
+  const [activeNotFound, setActiveNotFound] = useState(false)
   const [cards, setCards] = useState<Card[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const user = useAppSelector((state) => state.user)
@@ -44,6 +44,7 @@ export default function HomeScreen({ navigation }: any) {
         ? ExportaFaturaMesAtual(user)
         : ExportaFaturaMesAnterior(user)
     const { codRet, msgRet, vlrFat } = await fatura
+
     return { codRet, msgRet, value: vlrFat ?? 0 }
   }
 
@@ -52,6 +53,7 @@ export default function HomeScreen({ navigation }: any) {
       exportaPagamentos6(user),
       exportaPagamentosPeriodo(user),
     ])
+
     return {
       pagamentos: pagamentos.titulo ?? [],
       pagamentosPeriodo: pagamentosPeriodo.periodo ?? [],
@@ -121,7 +123,7 @@ export default function HomeScreen({ navigation }: any) {
 
     if (user.properties.length < 0 || !user.properties) {
       toast.show(
-        'Você não possui um código de cliente vínculado, entre em contato com a empresa.'
+        'Há algo de errado com o seu usuário, entre em contato com a empresa.'
       )
 
       setActiveNotFound(true)
@@ -164,7 +166,7 @@ export default function HomeScreen({ navigation }: any) {
           gap={24}
         >
           <Text fontWeight={'700'} fontSize={28}>
-            Cliente não encontrado
+            Usuário não encontrado
           </Text>
 
           <Text
@@ -173,8 +175,8 @@ export default function HomeScreen({ navigation }: any) {
             fontSize={16}
             color={'$text-secondary'}
           >
-            Você não possui nenhum cliente vinculado, entre em contato com a
-            empresa para vincular um código de cliente.
+            Entre em contato com a sua empresa para verificar se o seu usuário
+            está correto.
           </Text>
 
           <Button

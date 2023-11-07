@@ -40,7 +40,7 @@ export default function UserInfo() {
 
       <YStack>
         <Text fontWeight={'700'} color={'$text-primary'} fontSize={'$5'}>
-          Clientes
+          Código de cliente
         </Text>
 
         <Text fontWeight={'700'} color={'$text-secondary'}>

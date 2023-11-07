@@ -31,10 +31,17 @@ export async function validateDocument(
 }
 
 export async function createUser(user: RegisterUser) {
-  const username = `${user.name!.trim().split(' ')[0].toLowerCase()}.${user
+  const username = `${user
+    .name!.trim()
+    .split(' ')[0]
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')}.${user
     .familyName!.trim()
     .split(' ')[0]
-    .toLowerCase()}`
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')}`
 
   const data = {
     username: username,
@@ -64,5 +71,5 @@ export async function createUser(user: RegisterUser) {
     }
   )
 
-  return res.data
+  return username
 }

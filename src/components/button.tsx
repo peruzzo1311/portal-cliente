@@ -1,4 +1,4 @@
-import { Button, GetProps, styled } from 'tamagui'
+import { Button, styled } from 'tamagui'
 
 export const ThemedButton = styled(Button, {
   size: '$5',
@@ -8,11 +8,6 @@ export const ThemedButton = styled(Button, {
   fontWeight: 'bold',
   fontSize: 20,
 
-  animation: '150ms',
-  pressStyle: {
-    backgroundColor: '$primary2',
-  },
-
   variants: {
     pinBottom: {
       true: {
@@ -20,9 +15,8 @@ export const ThemedButton = styled(Button, {
         bottom: 0,
         right: 0,
         left: 0,
+        borderRadius: 0,
       },
     },
   },
 })
-
-export type ThemedButtonProps = GetProps<typeof ThemedButton>

@@ -1,6 +1,7 @@
 import { validateDocument } from '@/api/register'
 import { ThemedButton } from '@/components/button'
 import { InputText } from '@/components/text-input'
+import handleError from '@/utils/handle-error'
 import { Check, ChevronLeft } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import { useRef, useState } from 'react'
@@ -59,17 +60,6 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
     setDocument(value)
   }
 
-  const handleError = (error: any) => {
-    const status = error.response?.status
-    const messages: any = {
-      401: 'Usuário ou senha incorretos.',
-      500: 'Servidor indisponível, tente novamente mais tarde.',
-    }
-    const message = messages[status] || 'Ocorreu um erro inesperado.'
-    toast.show(message)
-    console.error('Erro:', error)
-  }
-
   const handleSubmit = async () => {
     try {
       setIsLoading(true)
@@ -90,7 +80,7 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
         toast.show(res.msgRet)
       }
     } catch (error: any) {
-      handleError(error)
+      toast.show(handleError(error))
     } finally {
       setIsLoading(false)
     }
@@ -102,7 +92,7 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
         width={40}
         height={40}
         backgroundColor={'#FFF'}
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.goBack()}
       >
         <ChevronLeft color={'$primary7'} size={40} />
       </Button>
