@@ -1,3 +1,4 @@
+import { Platform } from 'react-native'
 import ReactNativeBlobUtil from 'react-native-blob-util'
 
 export default function viewPdf(base64: string, filename: string) {
@@ -7,8 +8,14 @@ export default function viewPdf(base64: string, filename: string) {
   ReactNativeBlobUtil.fs
     .writeFile(path, base64, 'base64')
     .then(() => {
-      ReactNativeBlobUtil.fs.scanFile([{ path: path, mime: 'application/pdf' }])
-      ReactNativeBlobUtil.android.actionViewIntent(path, 'application/pdf')
+      if (Platform.OS === 'ios') {
+        ReactNativeBlobUtil.ios.openDocument(path)
+      } else {
+        ReactNativeBlobUtil.fs.scanFile([
+          { path: path, mime: 'application/pdf' },
+        ])
+        ReactNativeBlobUtil.android.actionViewIntent(path, 'application/pdf')
+      }
     })
     .catch((err) => {
       console.log(err.message)

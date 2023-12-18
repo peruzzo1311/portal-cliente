@@ -10,7 +10,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Check } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import React, { useEffect, useState } from 'react'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
+import {
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import {
   AnimatePresence,
   Checkbox,
@@ -137,7 +142,10 @@ export default function LoginScreen({ navigation }: any) {
   return (
     <AnimatePresence>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View flex={1} backgroundColor={'#FFF'}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={{ flex: 1, backgroundColor: '#FFF' }}
+        >
           <MessageToast />
 
           <View
@@ -248,7 +256,7 @@ export default function LoginScreen({ navigation }: any) {
               </Text>
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </TouchableWithoutFeedback>
     </AnimatePresence>
   )
