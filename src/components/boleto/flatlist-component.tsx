@@ -1,11 +1,10 @@
 import { baixarTitulo } from '@/api/boletos'
 import { useAppSelector } from '@/store/hooks'
 import Titulo from '@/types/Titulo'
-// import viewPdf from '@/utils/view-pdf'
+import viewPdf from '@/utils/view-pdf'
 import { Download } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import React, { memo, useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Button, Spinner, Text, XStack, YStack } from 'tamagui'
 
 type Props = {
@@ -18,6 +17,7 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDownload = async () => {
+    console.log('baixarTitulo')
     try {
       setIsLoading(true)
       const res = await baixarTitulo(user, item)
@@ -25,7 +25,7 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
       if (res.codRet === 0) {
         const filename = `Boleto_${item.numTit}.pdf`
 
-        // viewPdf(res.pdfBol, filename)
+        viewPdf(res.pdfBol, filename)
       } else {
         toastController.show(res.msgRet)
       }
@@ -77,19 +77,17 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
         </XStack>
       </YStack>
 
-      <TouchableOpacity>
-        <Button
-          backgroundColor={'$primary7'}
-          onPress={handleDownload}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Spinner color='$text-white' />
-          ) : (
-            <Download color='$text-white' />
-          )}
-        </Button>
-      </TouchableOpacity>
+      <Button
+        backgroundColor={'$primary7'}
+        onPress={handleDownload}
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <Spinner color='$text-white' />
+        ) : (
+          <Download color='$text-white' />
+        )}
+      </Button>
     </XStack>
   )
 }

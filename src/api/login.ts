@@ -21,7 +21,7 @@ export async function login({ username, password }: getTokenParams) {
 
 export async function getToken({ username, password }: getTokenParams) {
   const data = {
-    username: `${username.trim()}@kgepel.com.br`,
+    username: `${username.trim()}@prisma-demo.com.br.seniorx`,
     password,
   }
   const res = await axios.post(

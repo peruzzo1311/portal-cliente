@@ -103,7 +103,7 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
         fontWeight={'700'}
         color={'$text-primary'}
       >
-        Insira um documento válido para continuar
+        Insira credenciais válidas para continuar
       </Text>
 
       <View flexDirection='row' alignItems='center' gap={24}>

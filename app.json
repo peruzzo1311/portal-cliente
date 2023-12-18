@@ -15,19 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.prisma.portalcliente"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/icons/adaptive-icon.png",
         "backgroundColor": "#0171BB"
-      }
+      },
+      "package": "com.prisma.portalcliente"
     },
     "web": {
       "favicon": "./src/assets/icons/icon.png"
     },
     "experiments": {
       "tsconfigPaths": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8e5f7886-65ac-43b8-9ca9-1d639edd44a4"
+      }
     }
   }
 }

@@ -1,11 +1,10 @@
 import { baixarNota } from '@/api/nota-fiscal'
 import { useAppSelector } from '@/store/hooks'
 import NotaFiscal from '@/types/nota-fiscal'
-// import viewPdf from '@/utils/view-pdf'
+import viewPdf from '@/utils/view-pdf'
 import { Download } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import { memo, useState } from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Button, Spinner, Text, XStack, YStack } from 'tamagui'
 
 type Props = {
@@ -25,7 +24,7 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
       if (res.codRet === 0) {
         const filename = `Nota_${item.numNfv}.pdf`
 
-        // viewPdf(res.pdfNfe, filename)
+        viewPdf(res.pdfNfe, filename)
       } else {
         toastController.show(res.msgRet)
       }
@@ -63,19 +62,17 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
         </XStack>
       </YStack>
 
-      <TouchableOpacity>
-        <Button
-          backgroundColor={'$primary7'}
-          onPress={handleDownload}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <Spinner color='$text-white' />
-          ) : (
-            <Download color='$text-white' />
-          )}
-        </Button>
-      </TouchableOpacity>
+      <Button
+        backgroundColor={'$primary7'}
+        onPress={handleDownload}
+        disabled={isLoading}
+      >
+        {isLoading ? (
+          <Spinner color='$text-white' />
+        ) : (
+          <Download color='$text-white' />
+        )}
+      </Button>
     </XStack>
   )
 }
