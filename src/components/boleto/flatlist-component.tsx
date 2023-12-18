@@ -17,7 +17,6 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDownload = async () => {
-    console.log('baixarTitulo')
     try {
       setIsLoading(true)
       const res = await baixarTitulo(user, item)
