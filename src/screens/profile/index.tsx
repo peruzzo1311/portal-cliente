@@ -38,27 +38,28 @@ export default function ProfileScreen({ navigation }: Props) {
   }, [])
 
   return (
-    <View flex={1} backgroundColor={'$appBackground'}>
+    <View flex={1} backgroundColor={'#fff'}>
       <XStack
         alignItems='center'
-        backgroundColor={'$primary7'}
+        backgroundColor={'#fff'}
         paddingVertical={'$2'}
+        paddingHorizontal={'$4'}
       >
         <Button
           icon={ArrowLeft}
           backgroundColor={'$primary7'}
-          animation={'quick'}
-          pressStyle={{
-            scale: 0.9,
-            opacity: 0.8,
-            backgroundColor: '$primary7',
-          }}
           scaleIcon={2}
+          width={50}
           color={'$text-white'}
           onPress={() => navigation.goBack()}
         />
 
-        <Text fontSize={'$7'} fontWeight={'700'} color={'$text-white'}>
+        <Text
+          fontSize={'$7'}
+          fontWeight={'700'}
+          marginLeft={'$2'}
+          color={'$primary7'}
+        >
           Perfil
         </Text>
       </XStack>
@@ -77,12 +78,7 @@ export default function ProfileScreen({ navigation }: Props) {
 
       <View position='absolute' bottom={'$4'} right={'$8'} left={'$8'}>
         <Button
-          animation={'150ms'}
           backgroundColor={'$red10'}
-          pressStyle={{
-            scale: 0.9,
-            backgroundColor: '$red2',
-          }}
           color={'$text-white'}
           fontWeight={'700'}
           fontSize={20}

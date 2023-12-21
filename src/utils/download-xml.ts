@@ -1,9 +1,9 @@
 import { Platform } from 'react-native'
 import RNFetchBlob from 'rn-fetch-blob'
 
-export default function viewPdf(base64: string, numNfv: number) {
+export default function DownloadXml(base64: string, numNfv: number) {
   const dirs = RNFetchBlob.fs.dirs
-  const path = `${dirs.DocumentDir}/nota_${numNfv}.pdf`
+  const path = `${dirs.DocumentDir}/nota_${numNfv}.xml`
 
   RNFetchBlob.fs
     .writeFile(path, base64, 'base64')
@@ -11,11 +11,13 @@ export default function viewPdf(base64: string, numNfv: number) {
       if (Platform.OS === 'ios') {
         RNFetchBlob.ios.openDocument(path)
       } else {
-        RNFetchBlob.fs.scanFile([{ path: path, mime: 'application/pdf' }])
-        RNFetchBlob.android.actionViewIntent(path, 'application/pdf')
+        RNFetchBlob.fs.scanFile([{ path: path, mime: 'application/xml' }])
+        RNFetchBlob.android.actionViewIntent(path, 'application/xml')
       }
     })
     .catch((err) => {
       console.log(err.message)
     })
+
+  return path
 }

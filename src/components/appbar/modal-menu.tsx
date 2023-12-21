@@ -1,7 +1,7 @@
 import { DrawerNavigationProp } from '@react-navigation/drawer'
 import { Menu } from '@tamagui/lucide-icons'
 import React from 'react'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Button } from 'tamagui'
 
 type ModalMenuProps = {
   navigation: DrawerNavigationProp<Record<string, object>>
@@ -9,8 +9,13 @@ type ModalMenuProps = {
 
 export default function ModalMenu({ navigation }: ModalMenuProps) {
   return (
-    <TouchableOpacity onPress={() => navigation.openDrawer()}>
-      <Menu size={'$3'} color={'$text-white'} />
-    </TouchableOpacity>
+    <Button
+      backgroundColor={'$primary7'}
+      color={'$text-white'}
+      width={50}
+      icon={Menu}
+      scaleIcon={2}
+      onPress={() => navigation.openDrawer()}
+    />
   )
 }

@@ -32,7 +32,6 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
 
   return (
     <Card
-      elevation={4}
       borderWidth={1}
       borderColor={'$borderColor'}
       borderTopWidth={5}

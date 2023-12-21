@@ -15,11 +15,6 @@ export default function BoletosFilter({ clearFilter, setOpenFilter }: Props) {
         borderWidth={'$1'}
         borderColor={'$primary7'}
         color={'$primary7'}
-        pressStyle={{
-          backgroundColor: '$primary7',
-          //@ts-ignore
-          color: '$text-white',
-        }}
         scaleIcon={1.5}
         onPress={clearFilter}
       >

@@ -54,7 +54,7 @@ export default function NotasFiscaisScreen({ navigation }: any) {
   }, [])
 
   return (
-    <View backgroundColor={'$appBackground'} flex={1}>
+    <View backgroundColor={'#fff'} flex={1}>
       <AppBar navigation={navigation} />
 
       <YStack flex={1} padding={'$4'} backgroundColor={'#FFF'} gap={'$4'}>
@@ -66,14 +66,7 @@ export default function NotasFiscaisScreen({ navigation }: any) {
         <Separator borderColor={'$primary7'} />
 
         <AnimatePresence>
-          <YStack
-            animation={'bouncy'}
-            enterStyle={{
-              scale: 1.5,
-              y: -10,
-              opacity: 0,
-            }}
-          >
+          <YStack>
             <NotasFlatlist
               notas={notasFiltered}
               isLoading={isLoading}

@@ -14,11 +14,11 @@ export default function Cards({ cards }: Props) {
     <YStack gap={'$4'}>
       {cards.map((card, index) => (
         <Card
-          elevation={4}
           borderWidth={1}
           borderColor={'$borderColor'}
           borderTopWidth={5}
           borderTopColor={'#0171BB'}
+          backgroundColor={'#FFF'}
           key={index}
         >
           <Card.Header paddingHorizontal={'$4'} paddingVertical={'$5'}>

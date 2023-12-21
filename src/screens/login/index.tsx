@@ -232,7 +232,6 @@ export default function LoginScreen({ navigation }: any) {
                   scaleIcon={1.5}
                   disabled={isLoading}
                   opacity={isLoading ? 0.5 : 1}
-                  elevation={4}
                 >
                   {isLoading ? 'Entrando...' : 'Entrar'}
                 </ThemedButton>

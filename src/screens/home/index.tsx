@@ -139,13 +139,18 @@ export default function HomeScreen({ navigation }: any) {
       <MessageToast />
 
       {isLoading && (
-        <View flex={1} justifyContent='center' alignItems='center'>
+        <View
+          flex={1}
+          justifyContent='center'
+          alignItems='center'
+          backgroundColor={'#fff'}
+        >
           <Spinner size='large' color='$primary7' />
         </View>
       )}
 
       {!isLoading && !activeNotFound && (
-        <ScrollView flex={1} backgroundColor={'$appBackground'}>
+        <ScrollView flex={1} backgroundColor={'#fff'}>
           <YStack padding={'$4'} flex={1} space={'$4'}>
             <Cards cards={cards} />
 
@@ -183,12 +188,6 @@ export default function HomeScreen({ navigation }: any) {
             backgroundColor={'$primary7'}
             color={'$text-white'}
             fontWeight={'bold'}
-            animation={'150ms'}
-            pressStyle={{
-              scale: 0.9,
-              backgroundColor: '$primary2',
-            }}
-            elevation={4}
             size={'$5'}
             marginTop={24}
             onPress={handleLogout}

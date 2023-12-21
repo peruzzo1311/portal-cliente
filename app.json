@@ -16,14 +16,16 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.prisma.portalcliente"
+      "bundleIdentifier": "com.prisma.portalcliente",
+      "buildNumber": "2"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/icons/adaptive-icon.png",
         "backgroundColor": "#0171BB"
       },
-      "package": "com.prisma.portalcliente"
+      "package": "com.prisma.portalcliente",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./src/assets/icons/icon.png"

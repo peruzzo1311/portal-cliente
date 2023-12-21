@@ -71,7 +71,7 @@ export default function BoletosFilterModal({
       open={open}
       onOpenChange={handleOpenChange}
       dismissOnSnapToBottom
-      animation={'bouncy'}
+      animation={'quick'}
     >
       <Sheet.Overlay
         animation='lazy'
@@ -141,12 +141,6 @@ export default function BoletosFilterModal({
           fontWeight={'bold'}
           fontSize={20}
           scaleIcon={1.5}
-          animation={'150ms'}
-          pressStyle={{
-            scale: 0.9,
-            backgroundColor: '$primary2',
-          }}
-          elevation={4}
           size={'$5'}
           margin={'$4'}
           marginBottom={'$6'}

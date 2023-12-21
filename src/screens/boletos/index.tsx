@@ -51,7 +51,7 @@ export default function BoletosScreen({ navigation }: any) {
   }, [])
 
   return (
-    <View backgroundColor={'$appBackground'} flex={1}>
+    <View backgroundColor={'#fff'} flex={1}>
       <AppBar navigation={navigation} />
 
       <YStack flex={1} padding={'$4'} backgroundColor={'#FFF'} gap={'$4'}>

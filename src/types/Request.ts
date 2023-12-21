@@ -44,6 +44,10 @@ export interface BaixarNota extends RequestBase {
   pdfNfe: string
 }
 
+export interface BaixarNotaXml extends RequestBase {
+  xmlNfe: { string: string }[]
+}
+
 export interface ValidateDocument extends RequestBase {
   codCli: number
 }
