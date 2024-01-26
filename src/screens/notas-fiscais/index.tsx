@@ -20,6 +20,7 @@ export default function NotasFiscaisScreen({ navigation }: any) {
 
   const getData = async () => {
     try {
+      console.log('getdata')
       const res = await exportaNotas(user)
 
       if (res.codRet === 0) {
@@ -71,6 +72,7 @@ export default function NotasFiscaisScreen({ navigation }: any) {
               notas={notasFiltered}
               isLoading={isLoading}
               toast={toast}
+              onRefresh={getData}
             />
           </YStack>
         </AnimatePresence>

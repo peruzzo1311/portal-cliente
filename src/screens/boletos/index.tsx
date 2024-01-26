@@ -23,6 +23,7 @@ export default function BoletosScreen({ navigation }: any) {
 
       if (res.codRet === 0) {
         setBoletos(res.titulos)
+        console.log(res.titulos)
 
         setBoletosFiltered(res.titulos)
       } else {
@@ -67,6 +68,7 @@ export default function BoletosScreen({ navigation }: any) {
             boletos={boletosFiltered}
             isLoading={isLoading}
             toast={toast}
+            onRefresh={getBoletos}
           />
         </YStack>
       </YStack>

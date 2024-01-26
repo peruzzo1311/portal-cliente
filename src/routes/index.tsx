@@ -16,15 +16,22 @@ export default function StackRoute() {
       initialRouteName='Login'
       screenOptions={{
         headerShown: false,
-        cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+        cardStyleInterpolator:
+          CardStyleInterpolators.forHorizontalIOS,
       }}
     >
       <Stack.Group>
-        <Stack.Screen name='Login' component={LoginScreen} />
+        <Stack.Screen
+          name='Login'
+          component={LoginScreen}
+        />
       </Stack.Group>
 
       <Stack.Group>
-        <Stack.Screen name='DrawerRoute' component={DrawerRoute} />
+        <Stack.Screen
+          name='DrawerRoute'
+          component={DrawerRoute}
+        />
       </Stack.Group>
 
       <Stack.Group
@@ -34,9 +41,18 @@ export default function StackRoute() {
           gestureDirection: 'horizontal',
         }}
       >
-        <Stack.Screen name='DocumentValidate' component={DocumentValidate} />
-        <Stack.Screen name='Register' component={RegisterModal} />
-        <Stack.Screen name='Profile' component={ProfileScreen} />
+        <Stack.Screen
+          name='DocumentValidate'
+          component={DocumentValidate}
+        />
+        <Stack.Screen
+          name='Register'
+          component={RegisterModal}
+        />
+        <Stack.Screen
+          name='Profile'
+          component={ProfileScreen}
+        />
       </Stack.Group>
     </Stack.Navigator>
   )

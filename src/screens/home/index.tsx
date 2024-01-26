@@ -9,6 +9,7 @@ import { User } from '@/types/User'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useToastController } from '@tamagui/toast'
 import { useEffect, useState } from 'react'
+import { RefreshControl } from 'react-native-gesture-handler'
 import { Button, ScrollView, Spinner, Text, View, YStack } from 'tamagui'
 
 type Card = {
@@ -150,7 +151,13 @@ export default function HomeScreen({ navigation }: any) {
       )}
 
       {!isLoading && !activeNotFound && (
-        <ScrollView flex={1} backgroundColor={'#fff'}>
+        <ScrollView
+          flex={1}
+          backgroundColor={'#fff'}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getData} />
+          }
+        >
           <YStack padding={'$4'} flex={1} space={'$4'}>
             <Cards cards={cards} />
 
