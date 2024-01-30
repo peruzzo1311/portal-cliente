@@ -3,15 +3,19 @@ import { createUser } from '@/api/register'
 import RegisterFeedbackDialog from '@/components/register-feedback-dialog'
 import { InputText } from '@/components/text-input'
 import { RegisterUser } from '@/types/User'
-import schema from '@/utils/form-register-shape'
-import handleError from '@/utils/handle-error'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ChevronLeft } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import { useState } from 'react'
-import { Controller, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  Controller,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { Keyboard } from 'react-native'
 import { Button, Text, View } from 'tamagui'
+import schema from 'utils/form-register-shape'
+import handleError from 'utils/handle-error'
 
 type FormDataProps = {
   name: string
@@ -20,7 +24,10 @@ type FormDataProps = {
   passwordConfirm: string
 }
 
-export default function RegisterModal({ route, navigation }: any) {
+export default function RegisterModal({
+  route,
+  navigation,
+}: any) {
   const [openFeedback, setOpenFeedback] = useState(false)
   const [username, setUsername] = useState('')
   const { codCli, email } = route.params
@@ -44,7 +51,9 @@ export default function RegisterModal({ route, navigation }: any) {
     shouldFocusError: true,
   })
 
-  const handleRegister: SubmitHandler<FormDataProps> = async (data) => {
+  const handleRegister: SubmitHandler<
+    FormDataProps
+  > = async data => {
     try {
       const { token } = await login({
         username: 'weliton.ribeiro',
@@ -102,7 +111,9 @@ export default function RegisterModal({ route, navigation }: any) {
                 error={invalid}
                 ref={ref}
                 blurOnSubmit={false}
-                onSubmitEditing={() => setFocus('familyName')}
+                onSubmitEditing={() =>
+                  setFocus('familyName')
+                }
               />
 
               {error && (
@@ -157,7 +168,9 @@ export default function RegisterModal({ route, navigation }: any) {
                 secureTextEntry={true}
                 ref={ref}
                 blurOnSubmit={false}
-                onSubmitEditing={() => setFocus('passwordConfirm')}
+                onSubmitEditing={() =>
+                  setFocus('passwordConfirm')
+                }
               />
 
               {error && (

@@ -1,5 +1,6 @@
 import Titulo from './Titulo'
 import NotaFiscal from './nota-fiscal'
+import Romaneio from './romaneio'
 
 export interface RequestBase {
   codRet: number
@@ -21,7 +22,8 @@ export interface ExportaPagamentos extends RequestBase {
   }[]
 }
 
-export interface ExportaPagamentosPeriodo extends RequestBase {
+export interface ExportaPagamentosPeriodo
+  extends RequestBase {
   periodo: {
     vlrAbe: number
     descricao: string
@@ -50,4 +52,8 @@ export interface BaixarNotaXml extends RequestBase {
 
 export interface ValidateDocument extends RequestBase {
   codCli: number
+}
+
+export interface ExportaRomaneios extends RequestBase {
+  romaneios: Romaneio[]
 }

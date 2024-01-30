@@ -2,7 +2,7 @@
   "expo": {
     "name": "portal-cliente",
     "slug": "portal-cliente",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./src/assets/icons/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.prisma.portalcliente",
-      "buildNumber": "3"
+      "buildNumber": "4"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +25,7 @@
         "backgroundColor": "#0171BB"
       },
       "package": "com.prisma.portalcliente",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./src/assets/icons/icon.png"

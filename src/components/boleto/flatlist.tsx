@@ -1,7 +1,10 @@
 import Titulo from '@/types/Titulo'
 import { useToastController } from '@tamagui/toast'
-import { FlatList, RefreshControl } from 'react-native-gesture-handler'
-import { Separator, Spinner, Text, View } from 'tamagui'
+import {
+  FlatList,
+  RefreshControl,
+} from 'react-native-gesture-handler'
+import { Separator, Text } from 'tamagui'
 import BoletosFlatlistComponent from './flatlist-component'
 
 type Props = {
@@ -18,24 +21,29 @@ export default function BoletosFlatlist({
   onRefresh,
 }: Props) {
   const renderItem = ({ item }: { item: Titulo }) => (
-    <BoletosFlatlistComponent item={item} toastController={toast} />
+    <BoletosFlatlistComponent
+      item={item}
+      toastController={toast}
+    />
   )
 
   return (
     <FlatList
       data={boletos}
-      keyExtractor={(item) => item.numTit}
+      keyExtractor={item => item.numTit}
       renderItem={renderItem}
-      ItemSeparatorComponent={(<Separator marginVertical={'$4'} />) as any}
+      ItemSeparatorComponent={
+        (<Separator marginVertical={'$4'} />) as any
+      }
       refreshControl={
-        <RefreshControl refreshing={isLoading} onRefresh={onRefresh} />
+        <RefreshControl
+          refreshing={isLoading}
+          onRefresh={onRefresh}
+        />
       }
       ListEmptyComponent={
-        isLoading ? (
-          <View flex={1} justifyContent='center' alignItems='center'>
-            <Spinner size='large' color='$primary7' />
-          </View>
-        ) : (
+        !isLoading &&
+        ((
           <Text
             color={'$primary7'}
             textAlign={'center'}
@@ -44,7 +52,7 @@ export default function BoletosFlatlist({
           >
             Nenhum boleto encontrado
           </Text>
-        )
+        ) as any)
       }
     />
   )

@@ -3,6 +3,7 @@ import LoginScreen from '@/screens/login'
 import ProfileScreen from '@/screens/profile'
 import DocumentValidate from '@/screens/register/document-validate'
 import RegisterModal from '@/screens/register/register-modal'
+import RomaneiosDetail from '@/screens/romaneios/detail'
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -45,13 +46,20 @@ export default function StackRoute() {
           name='DocumentValidate'
           component={DocumentValidate}
         />
+
         <Stack.Screen
           name='Register'
           component={RegisterModal}
         />
+
         <Stack.Screen
           name='Profile'
           component={ProfileScreen}
+        />
+
+        <Stack.Screen
+          name='RomaneioDetail'
+          component={RomaneiosDetail}
         />
       </Stack.Group>
     </Stack.Navigator>

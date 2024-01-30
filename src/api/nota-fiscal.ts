@@ -1,10 +1,16 @@
-import { BaixarNota, BaixarNotaXml, ExportaNotas } from '@/types/Request'
+import {
+  BaixarNota,
+  BaixarNotaXml,
+  ExportaNotas,
+} from '@/types/Request'
 import { User } from '@/types/User'
 import NotaFiscal from '@/types/nota-fiscal'
-import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
+import FormatProperties from 'utils/format-properties'
 
-export async function exportaNotas(user: User): Promise<ExportaNotas> {
+export async function exportaNotas(
+  user: User
+): Promise<ExportaNotas> {
   const data = FormatProperties(user.properties)
 
   const response = await axios.post(
@@ -24,7 +30,9 @@ export async function exportaNotas(user: User): Promise<ExportaNotas> {
   return response.data
 }
 
-export async function baixarNota(nota: NotaFiscal): Promise<BaixarNota> {
+export async function baixarNota(
+  nota: NotaFiscal
+): Promise<BaixarNota> {
   const data = JSON.stringify({
     codEmp: nota.codEmp,
     codFil: nota.codFil,
@@ -49,7 +57,9 @@ export async function baixarNota(nota: NotaFiscal): Promise<BaixarNota> {
   return response.data
 }
 
-export async function baixarNotaXml(nota: NotaFiscal): Promise<BaixarNotaXml> {
+export async function baixarNotaXml(
+  nota: NotaFiscal
+): Promise<BaixarNotaXml> {
   const data = JSON.stringify({
     codEmp: nota.codEmp,
     codFil: nota.codFil,

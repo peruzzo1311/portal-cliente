@@ -1,36 +1,32 @@
-import NotaFiscal from '@/types/nota-fiscal'
+import Romaneio from '@/types/romaneio'
 import { useToastController } from '@tamagui/toast'
 import {
   FlatList,
   RefreshControl,
 } from 'react-native-gesture-handler'
 import { Separator, Text } from 'tamagui'
-import NotasFlatlistComponent from './flatlist-component'
+import RomaneiosFlatlistComponent from './flatlist-component'
 
 type Props = {
-  notas: NotaFiscal[]
+  romaneios: Romaneio[]
   isLoading: boolean
   toast: ReturnType<typeof useToastController>
   onRefresh: () => void
 }
 
-export default function NotasFlatlist({
-  notas,
+export default function RomaneiosFlatlist({
+  romaneios,
   isLoading,
-  toast,
   onRefresh,
 }: Props) {
-  const renderItem = ({ item }: { item: NotaFiscal }) => (
-    <NotasFlatlistComponent
-      item={item}
-      toastController={toast}
-    />
+  const renderItem = ({ item }: { item: Romaneio }) => (
+    <RomaneiosFlatlistComponent item={item} />
   )
 
   return (
     <FlatList
-      data={notas}
-      keyExtractor={item => item.numNfv.toString()}
+      data={romaneios}
+      keyExtractor={(item, index) => index.toString()}
       renderItem={renderItem}
       ItemSeparatorComponent={
         (<Separator marginVertical={'$4'} />) as any
@@ -50,7 +46,7 @@ export default function NotasFlatlist({
             fontSize={'$3'}
             fontWeight={'bold'}
           >
-            Nenhum boleto encontrado
+            Nenhum romaneio encontrado
           </Text>
         ) as any)
       }

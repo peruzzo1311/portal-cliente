@@ -1,7 +1,10 @@
-import { ExportaPagamentos, ExportaPagamentosPeriodo } from '@/types/Request'
+import {
+  ExportaPagamentos,
+  ExportaPagamentosPeriodo,
+} from '@/types/Request'
 import { User } from '@/types/User'
-import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
+import FormatProperties from 'utils/format-properties'
 
 export async function exportaPagamentos6(
   user: User

@@ -1,7 +1,10 @@
-import { FaturaMesAnterior, FaturaMesAtual } from '@/types/Request'
+import {
+  FaturaMesAnterior,
+  FaturaMesAtual,
+} from '@/types/Request'
 import { User } from '@/types/User'
-import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
+import FormatProperties from 'utils/format-properties'
 
 export async function ExportaFaturaMesAtual(
   user: User

@@ -11,10 +11,12 @@ import { Separator, View, YStack } from 'tamagui'
 
 export default function BoletosScreen({ navigation }: any) {
   const [openFilter, setOpenFilter] = useState(false)
-  const [boletosFiltered, setBoletosFiltered] = useState<Titulo[]>([])
+  const [boletosFiltered, setBoletosFiltered] = useState<
+    Titulo[]
+  >([])
   const [boletos, setBoletos] = useState<Titulo[]>([])
   const [isLoading, setIsLoading] = useState(true)
-  const user = useAppSelector((state) => state.user)
+  const user = useAppSelector(state => state.user)
   const toast = useToastController()
 
   const getBoletos = async () => {
@@ -23,7 +25,6 @@ export default function BoletosScreen({ navigation }: any) {
 
       if (res.codRet === 0) {
         setBoletos(res.titulos)
-        console.log(res.titulos)
 
         setBoletosFiltered(res.titulos)
       } else {
@@ -55,7 +56,12 @@ export default function BoletosScreen({ navigation }: any) {
     <View backgroundColor={'#fff'} flex={1}>
       <AppBar navigation={navigation} />
 
-      <YStack flex={1} padding={'$4'} backgroundColor={'#FFF'} gap={'$4'}>
+      <YStack
+        flex={1}
+        padding={'$4'}
+        backgroundColor={'#FFF'}
+        gap={'$4'}
+      >
         <BoletosFilter
           clearFilter={handleClearFilter}
           setOpenFilter={setOpenFilter}

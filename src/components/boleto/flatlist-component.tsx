@@ -1,19 +1,28 @@
 import { baixarTitulo } from '@/api/boletos'
 import { useAppSelector } from '@/store/hooks'
 import Titulo from '@/types/Titulo'
-import viewPdf from '@/utils/view-pdf'
 import { Download } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import React, { memo, useState } from 'react'
-import { Button, Spinner, Text, XStack, YStack } from 'tamagui'
+import {
+  Button,
+  Spinner,
+  Text,
+  XStack,
+  YStack,
+} from 'tamagui'
+import viewPdf from 'utils/view-pdf'
 
 type Props = {
   item: Titulo
   toastController: ReturnType<typeof useToastController>
 }
 
-const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
-  const user = useAppSelector((state) => state.user)
+const BoletosFlatlistComponent = ({
+  item,
+  toastController,
+}: Props) => {
+  const user = useAppSelector(state => state.user)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleDownload = async () => {
@@ -43,7 +52,10 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
     >
       <YStack gap={'$2'}>
         <XStack gap={'$2'}>
-          <Text fontWeight={'700'} color={'$text-secondary'}>
+          <Text
+            fontWeight={'700'}
+            color={'$text-secondary'}
+          >
             N° do título:
           </Text>
 
@@ -53,7 +65,10 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
         </XStack>
 
         <XStack gap={'$2'}>
-          <Text fontWeight={'700'} color={'$text-secondary'}>
+          <Text
+            fontWeight={'700'}
+            color={'$text-secondary'}
+          >
             Vencimento:
           </Text>
 
@@ -63,7 +78,10 @@ const BoletosFlatlistComponent = ({ item, toastController }: Props) => {
         </XStack>
 
         <XStack gap={'$2'}>
-          <Text fontWeight={'700'} color={'$text-secondary'}>
+          <Text
+            fontWeight={'700'}
+            color={'$text-secondary'}
+          >
             Valor:
           </Text>
 

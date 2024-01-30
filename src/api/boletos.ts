@@ -1,10 +1,15 @@
-import { BaixarTitulo, ExportaTitulos } from '@/types/Request'
+import {
+  BaixarTitulo,
+  ExportaTitulos,
+} from '@/types/Request'
 import Titulo from '@/types/Titulo'
 import { User } from '@/types/User'
-import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
+import FormatProperties from 'utils/format-properties'
 
-export async function exportaTitulos(user: User): Promise<ExportaTitulos> {
+export async function exportaTitulos(
+  user: User
+): Promise<ExportaTitulos> {
   const data = FormatProperties(user.properties)
 
   const response = await axios.post(

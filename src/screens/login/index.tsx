@@ -5,7 +5,6 @@ import { InputText } from '@/components/text-input'
 import { AppDispatch } from '@/store'
 import { useAppDispatch } from '@/store/hooks'
 import { User } from '@/types/User'
-import handleError from '@/utils/handle-error'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Check } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
@@ -25,6 +24,7 @@ import {
   Text,
   View,
 } from 'tamagui'
+import handleError from 'utils/handle-error'
 
 export default function LoginScreen({ navigation }: any) {
   const [isLoading, setIsLoading] = useState(false)

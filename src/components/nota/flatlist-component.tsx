@@ -1,9 +1,15 @@
-import { baixarNota, baixarNotaXml } from '@/api/nota-fiscal'
+import {
+  baixarNota,
+  baixarNotaXml,
+} from '@/api/nota-fiscal'
 import { useAppSelector } from '@/store/hooks'
 import NotaFiscal from '@/types/nota-fiscal'
-import DownloadXml from '@/utils/download-xml'
-import viewPdf from '@/utils/view-pdf'
-import { Download, File, FileX, X } from '@tamagui/lucide-icons'
+import {
+  Download,
+  File,
+  FileX,
+  X,
+} from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import * as Sharing from 'expo-sharing'
 import { memo, useState } from 'react'
@@ -18,14 +24,19 @@ import {
   XStack,
   YStack,
 } from 'tamagui'
+import DownloadXml from 'utils/download-xml'
+import viewPdf from 'utils/view-pdf'
 
 type Props = {
   item: NotaFiscal
   toastController: ReturnType<typeof useToastController>
 }
 
-const NotasFlatlistComponent = ({ item, toastController }: Props) => {
-  const user = useAppSelector((state) => state.user)
+const NotasFlatlistComponent = ({
+  item,
+  toastController,
+}: Props) => {
+  const user = useAppSelector(state => state.user)
   const [isLoading, setIsLoading] = useState(false)
   const [openModal, setOpenModal] = useState(false)
 
@@ -55,7 +66,7 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
       const res = await baixarNotaXml(item)
 
       if (res.codRet === 0) {
-        res.xmlNfe.forEach(async (xml) => {
+        res.xmlNfe.forEach(async xml => {
           const path = DownloadXml(xml.string, item.numNfv)
 
           if (await Sharing.isAvailableAsync()) {
@@ -81,7 +92,10 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
     >
       <YStack gap={'$2'}>
         <XStack gap={'$2'}>
-          <Text fontWeight={'700'} color={'$text-secondary'}>
+          <Text
+            fontWeight={'700'}
+            color={'$text-secondary'}
+          >
             N° da nota:
           </Text>
 
@@ -91,7 +105,10 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
         </XStack>
 
         <XStack gap={'$2'}>
-          <Text fontWeight={'700'} color={'$text-secondary'}>
+          <Text
+            fontWeight={'700'}
+            color={'$text-secondary'}
+          >
             Data:
           </Text>
           <Text fontWeight={'700'} color={'$text-primary'}>
@@ -103,10 +120,13 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
       <Dialog
         modal
         open={openModal}
-        onOpenChange={(open) => setOpenModal(open)}
+        onOpenChange={open => setOpenModal(open)}
       >
         <Dialog.Trigger asChild>
-          <Button backgroundColor={'$primary7'} disabled={isLoading}>
+          <Button
+            backgroundColor={'$primary7'}
+            disabled={isLoading}
+          >
             {isLoading ? (
               <Spinner color='$text-white' />
             ) : (
@@ -137,8 +157,18 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
                 },
               },
             ]}
-            enterStyle={{ x: 0, y: -20, opacity: 0, scale: 0.9 }}
-            exitStyle={{ x: 0, y: 10, opacity: 0, scale: 0.95 }}
+            enterStyle={{
+              x: 0,
+              y: -20,
+              opacity: 0,
+              scale: 0.9,
+            }}
+            exitStyle={{
+              x: 0,
+              y: 10,
+              opacity: 0,
+              scale: 0.95,
+            }}
             gap='$4'
             minWidth={300}
           >
@@ -193,7 +223,11 @@ const NotasFlatlistComponent = ({ item, toastController }: Props) => {
             )}
 
             {isLoading && (
-              <XStack justifyContent='center' alignItems='center' height={125}>
+              <XStack
+                justifyContent='center'
+                alignItems='center'
+                height={125}
+              >
                 <Spinner size='large' color='$primary7' />
               </XStack>
             )}
