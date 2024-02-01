@@ -34,6 +34,7 @@ export default function RomaneiosScreen({
     }
 
     setRomaneios(romaneios.romaneios ?? [])
+    setRomaneiosFiltered(romaneios.romaneios ?? [])
     setIsLoading(false)
   }
 

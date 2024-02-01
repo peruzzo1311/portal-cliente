@@ -1,33 +1,21 @@
 import Romaneio from '@/types/romaneio'
 import { Check, ChevronDown } from '@tamagui/lucide-icons'
 import { useEffect, useState } from 'react'
-import { Dimensions, TouchableOpacity } from 'react-native'
-import { BarChart } from 'react-native-chart-kit'
-import { AbstractChartConfig } from 'react-native-chart-kit/dist/AbstractChart'
-import { ChartData } from 'react-native-chart-kit/dist/HelperTypes'
+import { TouchableOpacity } from 'react-native'
 import {
+  AnimatePresence,
   Button,
   Card,
   Dialog,
   Label,
+  ListItem,
   Separator,
   Text,
   View,
   XStack,
   YStack,
 } from 'tamagui'
-
-const chartConfig: AbstractChartConfig = {
-  backgroundGradientFrom: 'white',
-  backgroundGradientFromOpacity: 1,
-  backgroundGradientTo: 'white',
-  backgroundGradientToOpacity: 1,
-  barPercentage: 0.8,
-  decimalPlaces: 0,
-  color: (opacity = 1) => `rgba(0, 119, 189, ${opacity})`,
-  labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-  useShadowColorFromDataset: false,
-}
+import { AnimatedYStack } from '../tab-animated'
 
 export default function GraphRomaneios({
   romaneios,
@@ -35,6 +23,8 @@ export default function GraphRomaneios({
   romaneios: Romaneio[]
 }) {
   const [selectedSafra, setSelectedSafra] = useState('')
+  const [romaneiosListItems, setRomaneiosListItems] =
+    useState([] as Romaneio[])
   const [open, setOpen] = useState(false)
 
   const onChangeSelectedSafra = (safra: string) => {
@@ -71,40 +61,6 @@ export default function GraphRomaneios({
     ))
   }
 
-  const chartData: ChartData = {
-    labels: [
-      ...new Set(
-        romaneios
-          .filter(
-            romaneio => romaneio.codSaf === selectedSafra
-          )
-          .map(romaneio => romaneio.codPro)
-      ),
-    ],
-    datasets: [
-      {
-        data: romaneios
-          .filter(
-            romaneio => romaneio.codSaf === selectedSafra
-          )
-          .reduce<Romaneio[]>((acc, obj) => {
-            const foundIndex = acc.findIndex(
-              item => item.codPro === obj.codPro
-            )
-
-            if (foundIndex !== -1) {
-              acc[foundIndex].qtdAbe += obj.qtdAbe
-            } else {
-              acc.push({ ...obj })
-            }
-
-            return acc
-          }, [])
-          .map(romaneio => romaneio.qtdAbe),
-      },
-    ],
-  }
-
   useEffect(() => {
     const uniqueSafras = [
       ...new Set(
@@ -115,16 +71,42 @@ export default function GraphRomaneios({
     setSelectedSafra(uniqueSafras[0])
   }, [romaneios])
 
+  useEffect(() => {
+    if (selectedSafra) {
+      const filteredRomaneios = romaneios
+        .filter(
+          romaneio => romaneio.codSaf === selectedSafra
+        )
+        .reduce<Romaneio[]>((acc, romaneio) => {
+          const foundIndex = acc.findIndex(
+            item => item.codPro === romaneio.codPro
+          )
+
+          if (foundIndex !== -1) {
+            acc[foundIndex].qtdAbe += romaneio.qtdAbe
+          } else {
+            acc.push({ ...romaneio })
+          }
+
+          return acc
+        }, [])
+
+      setRomaneiosListItems(filteredRomaneios)
+    }
+  }, [selectedSafra])
+
   return (
     <Card
       borderWidth={1}
       borderColor={'$borderColor'}
-      padding={'$1'}
+      borderTopWidth={5}
+      borderTopColor={'$primary7'}
       backgroundColor={'#FFF'}
+      padding={'$1'}
     >
       <Card.Header>
         <XStack alignItems='center' space>
-          <Label>Safra:</Label>
+          <Label fontSize={'$5'}>Safra:</Label>
 
           <Button
             iconAfter={ChevronDown}
@@ -177,6 +159,7 @@ export default function GraphRomaneios({
               }}
               gap='$4'
               width={300}
+              backgroundColor={'#FFF'}
             >
               <Text fontWeight={'bold'} fontSize={'$6'}>
                 Selecione uma safra
@@ -193,15 +176,30 @@ export default function GraphRomaneios({
         </Dialog>
       </Card.Header>
 
-      <BarChart
-        data={chartData}
-        width={Dimensions.get('window').width - 50}
-        height={220}
-        chartConfig={chartConfig}
-        fromZero
-        yAxisLabel=''
-        yAxisSuffix=''
-      />
+      <Separator />
+
+      <AnimatePresence
+        exitBeforeEnter
+        enterVariant={'isLeft'}
+        exitVariant={'isRight'}
+      >
+        <AnimatedYStack
+          key={selectedSafra}
+          animation={'200ms'}
+          x={0}
+          opacity={1}
+        >
+          <YStack separator={<Separator />}>
+            {romaneiosListItems.map(romaneio => (
+              <ListItem
+                key={romaneio.codPro}
+                title={romaneio.desPro}
+                subTitle={romaneio.qtdAbe.toString()}
+              />
+            ))}
+          </YStack>
+        </AnimatedYStack>
+      </AnimatePresence>
     </Card>
   )
 }
