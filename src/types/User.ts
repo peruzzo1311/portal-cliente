@@ -33,3 +33,10 @@ export interface RegisterUser {
   codCli: number
   token: string
 }
+
+export interface UserProperties {
+  codcli?: string
+  codemp?: string
+  codfil?: string
+  codfor?: string
+}

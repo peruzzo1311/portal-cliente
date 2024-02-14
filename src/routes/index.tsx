@@ -1,4 +1,5 @@
 import DrawerRoute from '@/routes/drawer'
+import ContractsDetails from '@/screens/contratos/detail'
 import LoginScreen from '@/screens/login'
 import ProfileScreen from '@/screens/profile'
 import DocumentValidate from '@/screens/register/document-validate'
@@ -60,6 +61,11 @@ export default function StackRoute() {
         <Stack.Screen
           name='RomaneioDetail'
           component={RomaneiosDetail}
+        />
+
+        <Stack.Screen
+          name='ContractsDetails'
+          component={ContractsDetails}
         />
       </Stack.Group>
     </Stack.Navigator>

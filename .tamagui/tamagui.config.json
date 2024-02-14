@@ -20608,8 +20608,7 @@
         },
         "150ms": {
           "type": "timing",
-          "duration": 150,
-          "easing": "Function"
+          "duration": 150
         },
         "200ms": {
           "type": "timing",

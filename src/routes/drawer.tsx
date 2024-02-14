@@ -1,9 +1,11 @@
 import BoletosScreen from '@/screens/boletos'
+import ContratosScreen from '@/screens/contratos'
 import HomeScreen from '@/screens/home'
 import NotasFiscaisScreen from '@/screens/notas-fiscais'
 import RomaneiosScreen from '@/screens/romaneios'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import {
+  FileEdit,
   Home,
   ScrollText,
   Ticket,
@@ -81,6 +83,19 @@ export default function DrawerRoute() {
           drawerLabel: 'Romaneios',
           drawerIcon(props) {
             return <Truck size={28} color={props.color} />
+          },
+        }}
+      />
+
+      <Drawer.Screen
+        name='ContratosScreen'
+        component={ContratosScreen}
+        options={{
+          drawerLabel: 'Contratos',
+          drawerIcon(props) {
+            return (
+              <FileEdit size={28} color={props.color} />
+            )
           },
         }}
       />

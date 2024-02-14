@@ -7,29 +7,22 @@ import {
   exportaPagamentosPeriodo,
 } from '@/api/graphs'
 import { GetRomaneios } from '@/api/romaneios'
-import AppBar from '@/components/appbar'
-import Cards from '@/components/cards'
-import MessageToast from '@/components/error-message'
-import Pagamentos from '@/components/pagamentos'
-import GraphRomaneios from '@/components/romaneios/graph'
 import {
   useAppDispatch,
   useAppSelector,
 } from '@/store/hooks'
 import { User } from '@/types/User'
 import Romaneio from '@/types/romaneio'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useToastController } from '@tamagui/toast'
 import { useEffect, useState } from 'react'
 import { RefreshControl } from 'react-native-gesture-handler'
-import {
-  Button,
-  ScrollView,
-  Spinner,
-  Text,
-  View,
-  YStack,
-} from 'tamagui'
+import { ScrollView, Spinner, View, YStack } from 'tamagui'
+
+import AppBar from '@/components/appbar'
+import Cards from '@/components/cards'
+import CardsCotacoes from '@/components/cotacoes'
+import MessageToast from '@/components/error-message'
+import Pagamentos from '@/components/pagamentos'
+import GraphRomaneios from '@/components/romaneios/graph'
 
 type Card = {
   label: string
@@ -52,13 +45,11 @@ export default function HomeScreen({ navigation }: any) {
   )
   const [pagamentosPeriodo, setPagamentosPeriodo] =
     useState<PagamentoPeriodo[]>([])
-  const [activeNotFound, setActiveNotFound] =
-    useState(false)
   const [cards, setCards] = useState<Card[]>([])
   const [romaneios, setRomaneios] = useState<Romaneio[]>([])
   const [isLoading, setIsLoading] = useState(false)
+
   const user = useAppSelector(state => state.user)
-  const toast = useToastController()
   const dispatch = useAppDispatch()
 
   const getFatura = async (user: User, mes: string) => {
@@ -121,55 +112,15 @@ export default function HomeScreen({ navigation }: any) {
       setPagamentosPeriodo(pagamentos.pagamentosPeriodo)
       setCards(cards)
       setRomaneios(romaneios)
-
-      if (
-        faturaMesAtual.codRet === 1 &&
-        faturaMesAnterior.codRet === 1
-      ) {
-        toast.show('Nenhum dado encontrado.')
-      } else if (
-        faturaMesAtual.codRet === 1 ||
-        faturaMesAnterior.codRet === 1
-      ) {
-        toast.show(
-          faturaMesAtual.msgRet || faturaMesAnterior.msgRet
-        )
-      }
-    } catch (error: any) {
-      const status = error.response?.status
-      const errorMsg =
-        status === 500
-          ? 'Servidor indisponível, tente novamente mais tarde.'
-          : 'Ocorreu um erro ao buscar os dados.'
-
-      toast.show(errorMsg)
+    } catch (error) {
+      console.log(error)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleLogout = async () => {
-    await AsyncStorage.removeItem('@user')
-
-    dispatch({
-      type: 'user/clearUser',
-    })
-
-    navigation.replace('Login', {})
-  }
-
   useEffect(() => {
-    toast.hide()
-
-    if (user.properties.length < 0 || !user.properties) {
-      toast.show(
-        'Há algo de errado com o seu usuário, entre em contato com a empresa.'
-      )
-
-      setActiveNotFound(true)
-    } else {
-      getData()
-    }
+    getData()
   }, [])
 
   return (
@@ -189,7 +140,7 @@ export default function HomeScreen({ navigation }: any) {
         </View>
       )}
 
-      {!isLoading && !activeNotFound && (
+      {!isLoading && (
         <ScrollView
           flex={1}
           backgroundColor={'#fff'}
@@ -209,43 +160,10 @@ export default function HomeScreen({ navigation }: any) {
             />
 
             <GraphRomaneios romaneios={romaneios} />
+
+            <CardsCotacoes />
           </YStack>
         </ScrollView>
-      )}
-
-      {!isLoading && activeNotFound && (
-        <View
-          padding={4}
-          flex={1}
-          justifyContent='center'
-          alignItems='center'
-          gap={24}
-        >
-          <Text fontWeight={'700'} fontSize={28}>
-            Usuário não encontrado
-          </Text>
-
-          <Text
-            textAlign='center'
-            fontWeight={'700'}
-            fontSize={16}
-            color={'$text-secondary'}
-          >
-            Entre em contato com a sua empresa para
-            verificar se o seu usuário está correto.
-          </Text>
-
-          <Button
-            backgroundColor={'$primary7'}
-            color={'$text-white'}
-            fontWeight={'bold'}
-            size={'$5'}
-            marginTop={24}
-            onPress={handleLogout}
-          >
-            Voltar a tela de login
-          </Button>
-        </View>
       )}
     </View>
   )

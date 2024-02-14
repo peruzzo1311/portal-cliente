@@ -1,5 +1,8 @@
 import { User } from '@/types/User'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+  createSlice,
+  PayloadAction,
+} from '@reduxjs/toolkit'
 import { RootState } from '..'
 
 const userInitialState = {
@@ -28,8 +31,10 @@ export const userSlice = createSlice({
   initialState: userInitialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
-      state.allowedToChangePassword = action.payload.allowedToChangePassword
-      state.authenticationType = action.payload.authenticationType
+      state.allowedToChangePassword =
+        action.payload.allowedToChangePassword
+      state.authenticationType =
+        action.payload.authenticationType
       state.blocked = action.payload.blocked
       state.changePassword = action.payload.changePassword
       state.email = action.payload.email
@@ -37,7 +42,8 @@ export const userSlice = createSlice({
       state.id = action.payload.id
       state.photo = action.payload.photo
       state.photoUrl = action.payload.photoUrl
-      state.photoUrlExpirationDate = action.payload.photoUrlExpirationDate
+      state.photoUrlExpirationDate =
+        action.payload.photoUrlExpirationDate
       state.properties = action.payload.properties
       state.tenantDomain = action.payload.tenantDomain
       state.tenantLocale = action.payload.tenantLocale
@@ -46,10 +52,13 @@ export const userSlice = createSlice({
       state.keepLogin = action.payload.keepLogin
       state.token = action.payload.token
     },
-    changePhotoUrl: (state, action: PayloadAction<string>) => {
+    changePhotoUrl: (
+      state,
+      action: PayloadAction<string>
+    ) => {
       state.photoUrl = action.payload
     },
-    clearUser: (state) => {
+    clearUser: state => {
       state = userInitialState
     },
   },

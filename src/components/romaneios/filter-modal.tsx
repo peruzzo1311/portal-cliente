@@ -117,7 +117,7 @@ export default function RomaneiosFilterModal({
       modal
       open={open}
       onOpenChange={handleOpenChange}
-      dismissOnSnapToBottom
+      dismissOnSnapToBottom={true}
       animation={'quick'}
     >
       <Sheet.Overlay

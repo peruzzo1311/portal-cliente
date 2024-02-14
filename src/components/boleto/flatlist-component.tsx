@@ -31,9 +31,7 @@ const BoletosFlatlistComponent = ({
       const res = await baixarTitulo(user, item)
 
       if (res.codRet === 0) {
-        const filename = `Boleto_${item.numTit}.pdf`
-
-        viewPdf(res.pdfBol, filename)
+        viewPdf(res.pdfBol, item.numNfv)
       } else {
         toastController.show(res.msgRet)
       }
@@ -52,10 +50,7 @@ const BoletosFlatlistComponent = ({
     >
       <YStack gap={'$2'}>
         <XStack gap={'$2'}>
-          <Text
-            fontWeight={'700'}
-            color={'$text-secondary'}
-          >
+          <Text color={'$text-secondary'}>
             N° do título:
           </Text>
 
@@ -65,12 +60,7 @@ const BoletosFlatlistComponent = ({
         </XStack>
 
         <XStack gap={'$2'}>
-          <Text
-            fontWeight={'700'}
-            color={'$text-secondary'}
-          >
-            Vencimento:
-          </Text>
+          <Text color={'$text-secondary'}>Vencimento:</Text>
 
           <Text fontWeight={'700'} color={'$text-primary'}>
             {item.vctPro}
@@ -78,12 +68,7 @@ const BoletosFlatlistComponent = ({
         </XStack>
 
         <XStack gap={'$2'}>
-          <Text
-            fontWeight={'700'}
-            color={'$text-secondary'}
-          >
-            Valor:
-          </Text>
+          <Text color={'$text-secondary'}>Valor:</Text>
 
           <Text fontWeight={'700'} color={'$text-primary'}>
             {item.vlrAbe.toLocaleString('pt-BR', {

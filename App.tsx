@@ -31,7 +31,6 @@ export default function App() {
     <Providers>
       <NavigationContainer>
         <ToastViewport
-          multipleToasts
           flexDirection='column-reverse'
           top={40}
           left={4}

@@ -6,11 +6,22 @@ interface Props {
   navigation: any
 }
 
-export default function RomaneiosDetail({
+export default function ContractsDetails({
   route,
   navigation,
 }: Props) {
   const { item } = route.params
+
+  const getValorizacao = (tipoValorizacao: number) => {
+    switch (tipoValorizacao) {
+      case 1:
+        return 'Valorização fixa'
+      case 2:
+        return 'Valorização variável'
+      default:
+        return 'Valorização não informada'
+    }
+  }
 
   return (
     <View flex={1} backgroundColor={'#FFF'}>
@@ -49,9 +60,31 @@ export default function RomaneiosDetail({
       >
         <XStack>
           <YStack width={'50%'}>
+            <Text fontWeight={'700'}>N° CONTRATO</Text>
+
+            <Text>{item.numCtr}</Text>
+          </YStack>
+
+          <YStack>
             <Text fontWeight={'700'}>FORNECEDOR</Text>
 
-            <Text>{item.nomFor}</Text>
+            <Text>{item.codFor}</Text>
+          </YStack>
+        </XStack>
+
+        <XStack>
+          <YStack width={'100%'}>
+            <Text fontWeight={'700'}>VALORIZAÇÃO</Text>
+
+            <Text>{getValorizacao(item.tipVlz)}</Text>
+          </YStack>
+        </XStack>
+
+        <XStack>
+          <YStack width={'50%'}>
+            <Text fontWeight={'700'}>MOEDA</Text>
+
+            <Text>{item.codMoe}</Text>
           </YStack>
 
           <YStack>
@@ -62,49 +95,44 @@ export default function RomaneiosDetail({
         </XStack>
 
         <XStack>
+          <YStack width={'50%'}>
+            <Text fontWeight={'700'}>Depósito</Text>
+
+            <Text>{item.codDep}</Text>
+          </YStack>
+
+          <YStack>
+            <Text fontWeight={'700'}>DATA EMISSÃO</Text>
+
+            <Text>{item.datEmi}</Text>
+          </YStack>
+        </XStack>
+
+        <XStack>
+          <YStack width={'50%'}>
+            <Text fontWeight={'700'}>PREÇO UN.</Text>
+
+            <Text>
+              {item.preUni.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+              })}
+            </Text>
+          </YStack>
+
+          <YStack>
+            <Text fontWeight={'700'}>QUANTIDADE</Text>
+
+            <Text>{item.qtdFor}</Text>
+          </YStack>
+        </XStack>
+
+        <XStack>
           <YStack width={'100%'}>
             <Text fontWeight={'700'}>PRODUTO</Text>
 
             <Text>
-              {item.codPro} - {item.desPro}
-            </Text>
-          </YStack>
-        </XStack>
-
-        <XStack>
-          <YStack width={'50%'}>
-            <Text fontWeight={'700'}>QTD. ROMANEIO</Text>
-
-            <Text>{item.qtdPed}</Text>
-          </YStack>
-
-          <YStack>
-            <Text fontWeight={'700'}>QTD. FIXADA</Text>
-
-            <Text>{item.qtdRec}</Text>
-          </YStack>
-        </XStack>
-
-        <XStack>
-          <YStack width={'50%'}>
-            <Text fontWeight={'700'}>QTD. CAN/DEV</Text>
-
-            <Text>{item.qtdCan}</Text>
-          </YStack>
-
-          <YStack>
-            <Text fontWeight={'700'}>SALDO ABERTO</Text>
-
-            <Text>{item.qtdAbe}</Text>
-          </YStack>
-        </XStack>
-
-        <XStack>
-          <YStack width={'100%'}>
-            <Text fontWeight={'700'}>FAMÍLIA</Text>
-
-            <Text>
-              {item.codFam} - {item.desFam}
+              {item.codPro} - {item.cplCcp}
             </Text>
           </YStack>
         </XStack>

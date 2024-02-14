@@ -1,13 +1,14 @@
 import { exportaTitulos } from '@/api/boletos'
-import AppBar from '@/components/appbar'
-import BoletosFilter from '@/components/boleto/filter'
-import BoletosFilterModal from '@/components/boleto/filter-modal'
-import BoletosFlatlist from '@/components/boleto/flatlist'
 import { useAppSelector } from '@/store/hooks'
 import Titulo from '@/types/Titulo'
 import { useToastController } from '@tamagui/toast'
 import { useEffect, useState } from 'react'
 import { Separator, View, YStack } from 'tamagui'
+
+import AppBar from '@/components/appbar'
+import BoletosFilter from '@/components/boleto/filter'
+import BoletosFilterModal from '@/components/boleto/filter-modal'
+import BoletosFlatlist from '@/components/boleto/flatlist'
 
 export default function BoletosScreen({ navigation }: any) {
   const [openFilter, setOpenFilter] = useState(false)
@@ -16,6 +17,7 @@ export default function BoletosScreen({ navigation }: any) {
   >([])
   const [boletos, setBoletos] = useState<Titulo[]>([])
   const [isLoading, setIsLoading] = useState(true)
+
   const user = useAppSelector(state => state.user)
   const toast = useToastController()
 
@@ -30,15 +32,8 @@ export default function BoletosScreen({ navigation }: any) {
       } else {
         toast.show(res.msgRet)
       }
-    } catch (error: any) {
-      const status = error.response?.status
-
-      const errorMsg =
-        status === 500
-          ? 'Servidor indisponível, tente novamente mais tarde.'
-          : 'Erro desconhecido'
-
-      toast.show(errorMsg)
+    } catch (error) {
+      console.log(error)
     } finally {
       setIsLoading(false)
     }

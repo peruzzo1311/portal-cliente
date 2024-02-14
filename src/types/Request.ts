@@ -1,4 +1,6 @@
 import Titulo from './Titulo'
+import ContratoCompra from './contratos'
+import Cotacoes from './cotacoes'
 import NotaFiscal from './nota-fiscal'
 import Romaneio from './romaneio'
 
@@ -56,4 +58,13 @@ export interface ValidateDocument extends RequestBase {
 
 export interface ExportaRomaneios extends RequestBase {
   romaneios: Romaneio[]
+}
+
+export interface ExportaCotacoes extends RequestBase {
+  cotacoes: Cotacoes[]
+}
+
+export default interface ExportaContratos
+  extends RequestBase {
+  contratos: ContratoCompra[]
 }

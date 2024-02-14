@@ -4,7 +4,7 @@ import MessageToast from '@/components/error-message'
 import { InputText } from '@/components/text-input'
 import { AppDispatch } from '@/store'
 import { useAppDispatch } from '@/store/hooks'
-import { User } from '@/types/User'
+import { User, UserProperties } from '@/types/User'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { Check } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
@@ -24,7 +24,6 @@ import {
   Text,
   View,
 } from 'tamagui'
-import handleError from 'utils/handle-error'
 
 export default function LoginScreen({ navigation }: any) {
   const [isLoading, setIsLoading] = useState(false)
@@ -38,6 +37,40 @@ export default function LoginScreen({ navigation }: any) {
     user: User,
     keepLogin: boolean
   ) => {
+    if (user.properties) {
+      const properties = {
+        codemp: '',
+        codfil: '',
+        codcli: '',
+        codfor: '',
+      } as UserProperties
+
+      user.properties.forEach(property => {
+        const value = property.value
+        const name = property.name.toLowerCase()
+
+        switch (name) {
+          case 'codemp':
+            properties.codemp = value
+            break
+          case 'codfil':
+            properties.codfil = value
+            break
+          case 'codcli':
+            properties.codcli = value
+            break
+          case 'codfor':
+            properties.codfor = value
+            break
+        }
+      })
+
+      appDispatch({
+        type: 'userProperties/setProperties',
+        payload: properties,
+      })
+    }
+
     appDispatch({
       type: 'user/setUser',
       payload: {
@@ -52,7 +85,7 @@ export default function LoginScreen({ navigation }: any) {
       const jsonValue = JSON.stringify(value)
       await AsyncStorage.setItem('@user', jsonValue)
     } catch (e) {
-      toast.show('Erro ao salvar usuário:')
+      console.log(e)
     }
   }
 
@@ -82,26 +115,25 @@ export default function LoginScreen({ navigation }: any) {
       if (!username || !password) {
         toast.show('Preencha todos os campos')
 
+        setIsLoading(false)
         return
       }
 
       const user = await handleLogin({ username, password })
 
       if (user) {
-        try {
-          handleDispatch(user, keepLogin)
-          handleStore({
-            ...user,
-            password,
-            keepLogin,
-          })
-          handleNavigation()
-        } catch (error: any) {
-          toast.show(handleError(error))
-        }
+        handleDispatch(user, keepLogin)
+
+        handleStore({
+          ...user,
+          password,
+          keepLogin,
+        })
+
+        handleNavigation()
       }
-    } catch (error: any) {
-      toast.show(handleError(error))
+    } catch (error) {
+      toast.show('Usuário ou senha incorretos')
     } finally {
       setIsLoading(false)
     }
@@ -123,27 +155,27 @@ export default function LoginScreen({ navigation }: any) {
             password,
           })
 
-          appDispatch({
-            type: 'user/setUser',
-            payload: {
-              ...user,
-              keepLogin: true,
-            },
-          })
+          if (user) {
+            handleDispatch(user, true)
 
-          handleNavigation()
+            handleStore({
+              ...user,
+              password,
+              keepLogin: true,
+            })
+
+            handleNavigation()
+          }
         }
       }
     } catch (error: any) {
-      toast.show(handleError(error))
+      console.log(error.message)
     } finally {
       setIsLoading(false)
     }
   }
 
   useEffect(() => {
-    toast.hide()
-
     handleKeepLogin()
   }, [])
 
@@ -165,8 +197,8 @@ export default function LoginScreen({ navigation }: any) {
           <Image
             source={require('@/assets/images/icon.png')}
             style={{
-              width: 150,
-              height: 150,
+              width: 100,
+              height: 100,
             }}
           />
 
@@ -184,7 +216,6 @@ export default function LoginScreen({ navigation }: any) {
                 value={username}
                 placeholder='Digite seu usuário'
                 disabled={isLoading}
-                borderColor={'$primary7'}
                 autoComplete='email'
                 selectTextOnFocus
                 onChangeText={setUsername}

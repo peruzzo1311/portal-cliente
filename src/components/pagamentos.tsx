@@ -4,8 +4,8 @@ import {
   Card,
   ListItem,
   Separator,
-  SizableText,
   Tabs,
+  Text,
   YStack,
 } from 'tamagui'
 import { AnimatedYStack } from './tab-animated'
@@ -44,9 +44,7 @@ export default function Pagamentos({
       padding={'$1'}
     >
       <Card.Header>
-        <SizableText fontSize={'$5'}>
-          Pagamentos
-        </SizableText>
+        <Text fontSize={'$5'}>Pagamentos</Text>
       </Card.Header>
 
       <Tabs
@@ -65,7 +63,7 @@ export default function Pagamentos({
                 : '$appBackground'
             }
           >
-            <SizableText
+            <Text
               color={
                 currentTab === 'pagamentos'
                   ? '$text-white'
@@ -76,7 +74,7 @@ export default function Pagamentos({
               }
             >
               Próximos 6 dias
-            </SizableText>
+            </Text>
           </Tabs.Tab>
 
           <Tabs.Tab
@@ -88,7 +86,7 @@ export default function Pagamentos({
             flex={1}
             value='pagamentosPeriodo'
           >
-            <SizableText
+            <Text
               color={
                 currentTab === 'pagamentosPeriodo'
                   ? '$text-white'
@@ -101,7 +99,7 @@ export default function Pagamentos({
               }
             >
               Por período
-            </SizableText>
+            </Text>
           </Tabs.Tab>
         </Tabs.List>
 

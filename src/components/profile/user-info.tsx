@@ -1,15 +1,32 @@
 import { useAppSelector } from '@/store/hooks'
-import { useCallback } from 'react'
 import { Separator, Text, YStack } from 'tamagui'
 
 export default function UserInfo() {
-  const renderSeparator = useCallback(() => <Separator />, [])
-  const user = useAppSelector((state) => state.user)
+  const user = useAppSelector(state => state.user)
+
+  const getCodcli = () => {
+    const codcli = user.properties.find(
+      property => property.name.toLowerCase() === 'codcli'
+    )
+
+    if (codcli) {
+      return codcli.value
+    }
+  }
 
   return (
-    <YStack flex={1} space={'$4'} padding={'$4'} separator={renderSeparator()}>
+    <YStack
+      flex={1}
+      space={'$4'}
+      padding={'$4'}
+      separator={<Separator />}
+    >
       <YStack>
-        <Text fontWeight={'700'} color={'$text-primary'} fontSize={'$5'}>
+        <Text
+          fontWeight={'700'}
+          color={'$text-primary'}
+          fontSize={'$5'}
+        >
           Email
         </Text>
 
@@ -19,7 +36,11 @@ export default function UserInfo() {
       </YStack>
 
       <YStack>
-        <Text fontWeight={'700'} color={'$text-primary'} fontSize={'$5'}>
+        <Text
+          fontWeight={'700'}
+          color={'$text-primary'}
+          fontSize={'$5'}
+        >
           Nome
         </Text>
 
@@ -29,7 +50,11 @@ export default function UserInfo() {
       </YStack>
 
       <YStack>
-        <Text fontWeight={'700'} color={'$text-primary'} fontSize={'$5'}>
+        <Text
+          fontWeight={'700'}
+          color={'$text-primary'}
+          fontSize={'$5'}
+        >
           Tenant
         </Text>
 
@@ -39,12 +64,16 @@ export default function UserInfo() {
       </YStack>
 
       <YStack>
-        <Text fontWeight={'700'} color={'$text-primary'} fontSize={'$5'}>
+        <Text
+          fontWeight={'700'}
+          color={'$text-primary'}
+          fontSize={'$5'}
+        >
           Código de cliente
         </Text>
 
         <Text fontWeight={'700'} color={'$text-secondary'}>
-          {user.properties.map((property) => property.value).join(', ')}
+          {getCodcli()}
         </Text>
       </YStack>
     </YStack>
