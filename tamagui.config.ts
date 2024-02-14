@@ -26,10 +26,6 @@ const animations = createAnimations({
   '150ms': {
     type: 'timing',
     duration: 150,
-    easing(value) {
-      'worklet'
-      return Math.sqrt(value)
-    },
   },
   '200ms': {
     type: 'timing',

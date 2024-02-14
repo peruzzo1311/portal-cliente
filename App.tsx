@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { ToastViewport } from '@tamagui/toast'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
-import { Platform, StatusBar } from 'react-native'
 import 'react-native-gesture-handler'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -31,7 +31,6 @@ export default function App() {
     <Providers>
       <NavigationContainer>
         <ToastViewport
-          multipleToasts
           flexDirection='column-reverse'
           top={40}
           left={4}
@@ -39,13 +38,7 @@ export default function App() {
         />
 
         <SafeAreaView style={{ flex: 1 }}>
-          <StatusBar
-            animated={true}
-            translucent={true}
-            showHideTransition='slide'
-            backgroundColor={'#0171BB'}
-            barStyle={Platform.OS === 'ios' ? 'dark-content' : 'light-content'}
-          />
+          <StatusBar backgroundColor='#fff' style='dark' />
 
           <StackRoute />
         </SafeAreaView>

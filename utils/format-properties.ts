@@ -3,10 +3,16 @@ type FormatPropertiesProps = {
   value: string
 }
 
-const FormatProperties = (properties: FormatPropertiesProps[]) => {
-  let data = {}
+type FormatPropertiesReturn = {
+  codCli: string
+}
 
-  properties.forEach((property) => {
+const FormatProperties = (
+  properties: FormatPropertiesProps[]
+) => {
+  let data = {} as FormatPropertiesReturn
+
+  properties.forEach(property => {
     const { name, value } = property
 
     if (name.toLowerCase() === 'codcli') {

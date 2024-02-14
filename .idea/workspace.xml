@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7b5a8080-c121-4dff-826c-374a8fc4b355" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/nota-fiscal.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/nota-fiscal.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/appbar/appbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/appbar/appbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/appbar/modal-menu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/appbar/modal-menu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/boleto/filter-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/boleto/filter-modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/boleto/filter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/boleto/filter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cards.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cards.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/graphs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/graphs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nota/filter-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nota/filter-modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/nota/flatlist-component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/nota/flatlist-component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/boletos/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/boletos/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/login/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/login/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/notas-fiscais/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/notas-fiscais/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/profile/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/profile/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/Request.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/Request.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/view-pdf.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/view-pdf.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="2ZiQqxBM2vaPhWBz5z4X05rVvIg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Usuario/Desktop/Gustavo/prisma/portal-cliente/android&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7b5a8080-c121-4dff-826c-374a8fc4b355" name="Changes" comment="" />
+      <created>1702902615949</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1702902615949</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,7 +1,10 @@
-import { FaturaMesAnterior, FaturaMesAtual } from '@/types/Request'
+import {
+  FaturaMesAnterior,
+  FaturaMesAtual,
+} from '@/types/Request'
 import { User } from '@/types/User'
-import FormatProperties from '@/utils/format-properties'
 import axios from 'axios'
+import FormatProperties from 'utils/format-properties'
 
 export async function ExportaFaturaMesAtual(
   user: User
@@ -9,12 +12,12 @@ export async function ExportaFaturaMesAtual(
   const data = FormatProperties(user.properties)
 
   const response = await axios.post(
-    'https://sistema.kgepel.com.br/API/G5Rest?server=https://sistema.kgepel.com.br&module=sapiens&service=com.prisma.portal.faturas&port=ExportaFaturasMesAtual&useAlwaysArray=true',
+    'https://demonstra.prismainformatica.com.br:8188/SXI/G5Rest?server=https://demonstra.prismainformatica.com.br:8188&module=sapiens&service=com.prisma.portal.faturas&port=ExportaFaturasMesAtual&useAlwaysArray=true',
     data,
     {
       headers: {
-        user: 'joao.dayko',
-        pass: '102030',
+        user: 'suporte',
+        pass: '@98fm',
         EncryptionType: '0',
         Authorization: '',
         'Content-Type': 'application/json',
@@ -31,12 +34,12 @@ export async function ExportaFaturaMesAnterior(
   const data = FormatProperties(user.properties)
 
   const response = await axios.post(
-    'https://sistema.kgepel.com.br/API/G5Rest?server=https://sistema.kgepel.com.br&module=sapiens&service=com.prisma.portal.faturas&port=ExportaFaturasMesAnterior&useAlwaysArray=true',
+    'https://demonstra.prismainformatica.com.br:8188/SXI/G5Rest?server=https://demonstra.prismainformatica.com.br:8188&module=sapiens&service=com.prisma.portal.faturas&port=ExportaFaturasMesAnterior&useAlwaysArray=true',
     data,
     {
       headers: {
-        user: 'joao.dayko',
-        pass: '102030',
+        user: 'suporte',
+        pass: '@98fm',
         EncryptionType: '0',
         Authorization: '',
         'Content-Type': 'application/json',

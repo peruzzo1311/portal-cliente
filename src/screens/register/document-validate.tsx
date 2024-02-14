@@ -1,15 +1,28 @@
 import { validateDocument } from '@/api/register'
 import { ThemedButton } from '@/components/button'
 import { InputText } from '@/components/text-input'
-import handleError from '@/utils/handle-error'
 import { Check, ChevronLeft } from '@tamagui/lucide-icons'
 import { useToastController } from '@tamagui/toast'
 import { useRef, useState } from 'react'
-import { Button, Checkbox, Label, Text, View } from 'tamagui'
+import {
+  Button,
+  Checkbox,
+  Label,
+  Text,
+  View,
+} from 'tamagui'
+import handleError from 'utils/handle-error'
 
-export default function DocumentValidate({ navigation }: { navigation: any }) {
-  const [documentInvalid, setDocumentInvalid] = useState(true)
-  const [documentType, setDocumentType] = useState<'cpf' | 'cnpj'>('cpf')
+export default function DocumentValidate({
+  navigation,
+}: {
+  navigation: any
+}) {
+  const [documentInvalid, setDocumentInvalid] =
+    useState(true)
+  const [documentType, setDocumentType] = useState<
+    'cpf' | 'cnpj'
+  >('cpf')
   const [document, setDocument] = useState('')
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -25,7 +38,10 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
 
   const formatCNPJ = (value: string) => {
     value = value.replace(/^(\d{2})(\d)/, '$1.$2')
-    value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+    value = value.replace(
+      /^(\d{2})\.(\d{3})(\d)/,
+      '$1.$2.$3'
+    )
     value = value.replace(/\.(\d{3})(\d)/, '.$1/$2')
     value = value.replace(/(\d{4})(\d)/, '$1-$2')
     return value
@@ -103,19 +119,31 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
         fontWeight={'700'}
         color={'$text-primary'}
       >
-        Insira um documento válido para continuar
+        Insira credenciais válidas para continuar
       </Text>
 
-      <View flexDirection='row' alignItems='center' gap={24}>
-        <View flexDirection='row' alignItems='center' gap={8}>
+      <View
+        flexDirection='row'
+        alignItems='center'
+        gap={24}
+      >
+        <View
+          flexDirection='row'
+          alignItems='center'
+          gap={8}
+        >
           <Checkbox
             size='$5'
             id='cpf'
             borderWidth={2}
             onCheckedChange={() => setDocumentType('cpf')}
             checked={documentType === 'cpf'}
-            backgroundColor={documentType === 'cpf' ? '$primary7' : '#fff'}
-            borderColor={documentType === 'cpf' ? '$primary7' : '#ddd'}
+            backgroundColor={
+              documentType === 'cpf' ? '$primary7' : '#fff'
+            }
+            borderColor={
+              documentType === 'cpf' ? '$primary7' : '#ddd'
+            }
             disabled={isLoading}
             pressStyle={{ scale: 0.9 }}
             animation={'bouncy'}
@@ -131,15 +159,23 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
           </Label>
         </View>
 
-        <View flexDirection='row' alignItems='center' gap={8}>
+        <View
+          flexDirection='row'
+          alignItems='center'
+          gap={8}
+        >
           <Checkbox
             size='$5'
             id='cnpj'
             borderWidth={2}
             onCheckedChange={() => setDocumentType('cnpj')}
             checked={documentType === 'cnpj'}
-            backgroundColor={documentType === 'cnpj' ? '$primary7' : '#fff'}
-            borderColor={documentType === 'cnpj' ? '$primary7' : '#ddd'}
+            backgroundColor={
+              documentType === 'cnpj' ? '$primary7' : '#fff'
+            }
+            borderColor={
+              documentType === 'cnpj' ? '$primary7' : '#ddd'
+            }
             disabled={isLoading}
             pressStyle={{ scale: 0.9 }}
             animation={'bouncy'}
@@ -156,10 +192,14 @@ export default function DocumentValidate({ navigation }: { navigation: any }) {
         </View>
       </View>
 
-      <Label fontSize={16}>{documentType === 'cpf' ? 'CPF' : 'CNPJ'}</Label>
+      <Label fontSize={16}>
+        {documentType === 'cpf' ? 'CPF' : 'CNPJ'}
+      </Label>
       <InputText
         placeholder={
-          documentType === 'cpf' ? '000.000.000-00' : '00.000.000/0000-00'
+          documentType === 'cpf'
+            ? '000.000.000-00'
+            : '00.000.000/0000-00'
         }
         value={document}
         disabled={isLoading}

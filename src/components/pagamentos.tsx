@@ -4,8 +4,8 @@ import {
   Card,
   ListItem,
   Separator,
-  SizableText,
   Tabs,
+  Text,
   YStack,
 } from 'tamagui'
 import { AnimatedYStack } from './tab-animated'
@@ -27,12 +27,15 @@ type Props = {
 
 type tabs = 'pagamentos' | 'pagamentosPeriodo' | string
 
-export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
-  const [currentTab, setCurrentTab] = useState<tabs>('pagamentos')
+export default function Pagamentos({
+  pagamentos,
+  pagamentosPeriodo,
+}: Props) {
+  const [currentTab, setCurrentTab] =
+    useState<tabs>('pagamentos')
 
   return (
     <Card
-      elevation={4}
       borderWidth={1}
       borderColor={'$borderColor'}
       borderTopWidth={5}
@@ -41,7 +44,7 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
       padding={'$1'}
     >
       <Card.Header>
-        <SizableText fontSize={'$5'}>Pagamentos</SizableText>
+        <Text fontSize={'$5'}>Pagamentos</Text>
       </Card.Header>
 
       <Tabs
@@ -55,17 +58,23 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
             flex={1}
             value='pagamentos'
             backgroundColor={
-              currentTab === 'pagamentos' ? '$primary7' : '$appBackground'
+              currentTab === 'pagamentos'
+                ? '$primary7'
+                : '$appBackground'
             }
           >
-            <SizableText
+            <Text
               color={
-                currentTab === 'pagamentos' ? '$text-white' : '$text-primary'
+                currentTab === 'pagamentos'
+                  ? '$text-white'
+                  : '$text-primary'
               }
-              fontWeight={currentTab === 'pagamentos' ? '700' : '400'}
+              fontWeight={
+                currentTab === 'pagamentos' ? '700' : '400'
+              }
             >
               Próximos 6 dias
-            </SizableText>
+            </Text>
           </Tabs.Tab>
 
           <Tabs.Tab
@@ -77,16 +86,20 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
             flex={1}
             value='pagamentosPeriodo'
           >
-            <SizableText
+            <Text
               color={
                 currentTab === 'pagamentosPeriodo'
                   ? '$text-white'
                   : '$text-primary'
               }
-              fontWeight={currentTab === 'pagamentosPeriodo' ? '700' : '400'}
+              fontWeight={
+                currentTab === 'pagamentosPeriodo'
+                  ? '700'
+                  : '400'
+              }
             >
               Por período
-            </SizableText>
+            </Text>
           </Tabs.Tab>
         </Tabs.List>
 
@@ -94,8 +107,16 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
 
         <AnimatePresence
           exitBeforeEnter
-          enterVariant={currentTab === 'pagamentos' ? 'isLeft' : 'isRight'}
-          exitVariant={currentTab === 'pagamentos' ? 'isRight' : 'isLeft'}
+          enterVariant={
+            currentTab === 'pagamentos'
+              ? 'isLeft'
+              : 'isRight'
+          }
+          exitVariant={
+            currentTab === 'pagamentos'
+              ? 'isRight'
+              : 'isLeft'
+          }
         >
           <AnimatedYStack
             key={currentTab}
@@ -110,22 +131,30 @@ export default function Graphs({ pagamentos, pagamentosPeriodo }: Props) {
                       <ListItem
                         key={index}
                         title={pagamento.vctPro}
-                        subTitle={pagamento.vlrAbe.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
+                        subTitle={pagamento.vlrAbe.toLocaleString(
+                          'pt-BR',
+                          {
+                            style: 'currency',
+                            currency: 'BRL',
+                          }
+                        )}
                       />
                     ))
-                  : pagamentosPeriodo.map((pagamento, index) => (
-                      <ListItem
-                        key={index}
-                        title={pagamento.descricao}
-                        subTitle={pagamento.vlrAbe.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                        })}
-                      />
-                    ))}
+                  : pagamentosPeriodo.map(
+                      (pagamento, index) => (
+                        <ListItem
+                          key={index}
+                          title={pagamento.descricao}
+                          subTitle={pagamento.vlrAbe.toLocaleString(
+                            'pt-BR',
+                            {
+                              style: 'currency',
+                              currency: 'BRL',
+                            }
+                          )}
+                        />
+                      )
+                    )}
               </YStack>
             </Tabs.Content>
           </AnimatedYStack>

@@ -8,14 +8,23 @@ import { useAppSelector } from '@/store/hooks'
 import NotaFiscal from '@/types/nota-fiscal'
 import { useToastController } from '@tamagui/toast'
 import { useEffect, useState } from 'react'
-import { AnimatePresence, Separator, View, YStack } from 'tamagui'
+import {
+  AnimatePresence,
+  Separator,
+  View,
+  YStack,
+} from 'tamagui'
 
-export default function NotasFiscaisScreen({ navigation }: any) {
-  const [notasFiltered, setNotasFiltered] = useState<NotaFiscal[]>([])
+export default function NotasFiscaisScreen({
+  navigation,
+}: any) {
+  const [notasFiltered, setNotasFiltered] = useState<
+    NotaFiscal[]
+  >([])
   const [notas, setNotas] = useState<NotaFiscal[]>([])
   const [openFilter, setOpenFilter] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
-  const user = useAppSelector((state) => state.user)
+  const user = useAppSelector(state => state.user)
   const toast = useToastController()
 
   const getData = async () => {
@@ -54,10 +63,15 @@ export default function NotasFiscaisScreen({ navigation }: any) {
   }, [])
 
   return (
-    <View backgroundColor={'$appBackground'} flex={1}>
+    <View backgroundColor={'#fff'} flex={1}>
       <AppBar navigation={navigation} />
 
-      <YStack flex={1} padding={'$4'} backgroundColor={'#FFF'} gap={'$4'}>
+      <YStack
+        flex={1}
+        padding={'$4'}
+        backgroundColor={'#FFF'}
+        gap={'$4'}
+      >
         <NotasFilter
           clearFilter={handleClearFilter}
           setOpenFilter={setOpenFilter}
@@ -66,18 +80,12 @@ export default function NotasFiscaisScreen({ navigation }: any) {
         <Separator borderColor={'$primary7'} />
 
         <AnimatePresence>
-          <YStack
-            animation={'bouncy'}
-            enterStyle={{
-              scale: 1.5,
-              y: -10,
-              opacity: 0,
-            }}
-          >
+          <YStack>
             <NotasFlatlist
               notas={notasFiltered}
               isLoading={isLoading}
               toast={toast}
+              onRefresh={getData}
             />
           </YStack>
         </AnimatePresence>

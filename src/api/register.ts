@@ -14,12 +14,12 @@ export async function validateDocument(
   }
 
   const res = await axios.post<ValidateDocument>(
-    'https://sistema.kgepel.com.br/API/G5Rest?server=https://sistema.kgepel.com.br&module=sapiens&port=ValidaCNPJ&useAlwaysArray=true&service=com.prisma.portal.faturas',
+    'https://demonstra.prismainformatica.com.br:8188/SXI/G5Rest?server=https://demonstra.prismainformatica.com.br:8188&module=sapiens&port=ValidaCNPJ&useAlwaysArray=true&service=com.prisma.portal.faturas',
     data,
     {
       headers: {
-        user: 'joao.dayko',
-        pass: '102030',
+        user: 'suporte',
+        pass: '@98fm',
         encryptionType: '0',
         Authorization: '',
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export async function createUser(user: RegisterUser) {
   const data = {
     username: username,
     fullName: `${user.name} ${user.familyName}`,
-    email: `${username.toLowerCase()}@kgepel.com.br`,
+    email: `${username.toLowerCase()}@prisma-demo.com.br.seniorx`,
     password: user.password,
     description: '',
     blocked: false,

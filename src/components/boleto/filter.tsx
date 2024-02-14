@@ -1,5 +1,4 @@
 import { Filter, FilterX } from '@tamagui/lucide-icons'
-import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Button, XStack } from 'tamagui'
 
 type Props = {
@@ -16,26 +15,19 @@ export default function BoletosFilter({ clearFilter, setOpenFilter }: Props) {
         borderWidth={'$1'}
         borderColor={'$primary7'}
         color={'$primary7'}
-        pressStyle={{
-          backgroundColor: '$primary7',
-          //@ts-ignore
-          color: '$text-white',
-        }}
         scaleIcon={1.5}
         onPress={clearFilter}
       >
         Limpar filtro
       </Button>
 
-      <TouchableOpacity>
-        <Button
-          icon={Filter}
-          backgroundColor={'$primary7'}
-          color={'$text-white'}
-          scaleIcon={1.5}
-          onPress={() => setOpenFilter(true)}
-        />
-      </TouchableOpacity>
+      <Button
+        icon={Filter}
+        backgroundColor={'$primary7'}
+        color={'$text-white'}
+        scaleIcon={1.5}
+        onPress={() => setOpenFilter(true)}
+      />
     </XStack>
   )
 }
